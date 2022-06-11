@@ -13,6 +13,10 @@
     <script src="{{ asset('assets/js/loader.js') }}"></script>
 </head>
 <body>
+@include('sessions.success')
+
+@include('sessions.error')
+
 <div class="edica-loader"></div>
 <header class="edica-header">
     <div class="container">

@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin\Category;
 
 use App\Http\Controllers\Controller;
-use function view;
+use App\Models\Category;
 
 class IndexController extends Controller
 {
     public function __invoke()
     {
-        return view('admin.categories.index');
+        $categories = Category::withTrashed()
+            ->paginate(5);
+
+        return view('admin.categories.index', compact('categories'));
     }
 }

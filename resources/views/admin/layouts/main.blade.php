@@ -34,6 +34,10 @@
         <img class="animation__shake" src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60" width="60">
     </div>
 
+    @include('sessions.success')
+
+    @include('sessions.error')
+
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <ul class="navbar-nav">
@@ -43,6 +47,7 @@
         </ul>
     </nav>
     <!-- /.navbar -->
+
 
     <!-- Main Sidebar Container -->
     @include('admin.includes.sidebar')
