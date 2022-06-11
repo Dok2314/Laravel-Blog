@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\Main as AdminMain;
+use App\Http\Controllers\Admin\Category as AdminCategory;
+use App\Http\Controllers\Main as Main;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Main AS M;
-use App\Http\Controllers\Admin\Main AS A;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,12 +18,17 @@ use App\Http\Controllers\Admin\Main AS A;
 */
 
 Route::group([], function () {
-    Route::get('/', M\IndexController::class);
+    Route::get('/', Main\IndexController::class);
 });
 
 Route::group(['prefix' => 'admin'], function (){
     Route::group([], function () {
-        Route::get('/', A\IndexController::class);
+        Route::get('/', AdminMain\IndexController::class);
+    });
+
+    Route::group(['prefix' => 'categories', 'as' => 'category.'], function () {
+        Route::get('/', AdminCategory\IndexController::class)
+            ->name('categories');
     });
 });
 
