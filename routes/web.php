@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Main AS M;
+use App\Http\Controllers\Admin\Main AS A;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +17,12 @@ use App\Http\Controllers\Main AS M;
 
 Route::group([], function () {
     Route::get('/', M\IndexController::class);
+});
+
+Route::group(['prefix' => 'admin'], function (){
+    Route::group([], function () {
+        Route::get('/', A\IndexController::class);
+    });
 });
 
 Auth::routes();
