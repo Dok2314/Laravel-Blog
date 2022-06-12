@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Tag;
 
-use App\Http\Controllers\Controller;
 use App\Models\Tag;
 
-class RestoreController extends Controller
+class RestoreController extends BaseController
 {
     public function __invoke($tag)
     {
