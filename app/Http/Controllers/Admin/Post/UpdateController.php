@@ -14,7 +14,17 @@ class UpdateController extends Controller
         $post->content = $request->input('content');
         $post->category_id = $request->input('category');
 
+        if ($request->file('preview_image')) {
+            $post->preview_image = $request->file('preview_image')->store('posts', 'images');
+        }
+
+        if($request->file('main_image')){
+            $post->main_image = $request->file('main_image')->store('posts', 'images');
+        }
+
         $post->save();
+
+        $post->tags()->sync($request->input('tags'));
 
         return redirect()->route('admin.post.index')
             ->with('success', 'Пост успешно обновлен!');

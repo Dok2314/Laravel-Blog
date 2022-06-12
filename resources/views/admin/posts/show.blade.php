@@ -19,10 +19,10 @@
                         </h1>
                         <a href="{{ route('admin.post.index') }}"><button class="btn btn-warning mt-3">Назад</button></a>
                     </div><!-- /.col -->
+
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
+                            <li class="breadcrumb-item"><a href="{{ route('admins.main') }}">Админка</a></li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -57,6 +57,7 @@
                                     <td>{{ $post->updated_at }}</td>
                             </tbody>
                         </table>
+                        <img src="{{ Storage::disk('images')->url($post->main_image) }}" class="w-50 h-50">
                     </div>
                 </div>
             </div>
