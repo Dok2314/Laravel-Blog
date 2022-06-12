@@ -8,6 +8,12 @@
                         Категории
                     </p>
                 </a>
+                <a href="{{ route('admin.tag.index') }}" class="nav-link">
+                    <i class="fas fa-th-list"></i>
+                    <p>
+                        Теги
+                    </p>
+                </a>
             </li>
         </ul>
     </div>

@@ -65,14 +65,34 @@
                                         <td>{{ $category->title }}</td>
                                         <td><strong>33</strong></td>
                                         <td>
-                                            <form action="">
-                                                <a href="" class="text text-danger">
-                                                    <i class="fas fa-backspace"></i>
-                                                </a>
-                                            </form>
-                                            <a href="{{ route('admin.category.edit', $category) }}">
+                                            @if($category->deleted_at)
+                                                <form action="{{ route('admin.category.restore', $category) }}" method="post">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button
+                                                        class="text text-warning"
+                                                        style="background: none; border: none; position: relative; right: 8px; font-size: 20px;">
+                                                        <i class="fas fa-trash-restore"></i>
+                                                    </button>
+                                                </form>
+                                            @else
+                                                <form action="{{ route('admin.category.delete', $category) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button
+                                                        class="fas fa-backspace text-danger"
+                                                        style="background: none; border: none; position: relative; right: 10px;"
+                                                    >
+                                                    </button>
+                                                </form>
+                                                <a href="{{ route('admin.category.edit', $category) }}">
                                                     <i class="fas fa-edit"></i>
-                                            </a>
+                                                </a>
+                                                <br>
+                                                <a href="{{ route('admin.category.show', $category) }}">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            @endif
                                         </td>
                                         <td>{{ $category->created_at }}</td>
                                         @if(!$category->deleted_at)
@@ -84,6 +104,9 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+                                <div class="pl-2">
+                                    {{ $categories->links('vendor.pagination.bootstrap-4') }}
+                                </div>
                             </div>
                             <!-- /.card-body -->
                         </div>
