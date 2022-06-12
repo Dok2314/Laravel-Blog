@@ -64,7 +64,7 @@
                                     <tr>
                                         <td>{{ $post->id }}</td>
                                         <td>{{ $post->title }}</td>
-                                        <td><strong>{{ $post->category_id }}</strong></td>
+                                        <td><strong>{{ $post->category->title }}</strong></td>
                                         <td>
                                             @if($post->deleted_at)
                                                 <form action="{{ route('admin.post.restore', $post) }}" method="post">
