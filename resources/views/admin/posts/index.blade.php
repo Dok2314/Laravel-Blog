@@ -1,6 +1,6 @@
 @extends('admin.layouts.main')
 
-@section('title', 'Список категорий')
+@section('title', 'Список постов')
 
 @section('content')
 <div class="content-wrapper">
@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Категории</h1>
+                    <h1 class="m-0">Посты</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -27,7 +27,7 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-2 mb-3">
-                    <a href="{{ route('admin.category.create') }}" class="btn btn-block btn-primary">Добавить</a>
+                    <a href="{{ route('admin.post.create') }}" class="btn btn-block btn-primary">Добавить</a>
                 </div>
             </div>
                 <div class="col-12">
@@ -53,21 +53,21 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Название</th>
-                                        <th>Количество постов у категории</th>
+                                        <th>Категория</th>
                                         <th>Действие</th>
                                         <th>Дата Создания</th>
                                         <th>Удалено</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($categories as $category)
+                                    @foreach($posts as $post)
                                     <tr>
-                                        <td>{{ $category->id }}</td>
-                                        <td>{{ $category->title }}</td>
-                                        <td><strong>33</strong></td>
+                                        <td>{{ $post->id }}</td>
+                                        <td>{{ $post->title }}</td>
+                                        <td><strong>{{ $post->category_id }}</strong></td>
                                         <td>
-                                            @if($category->deleted_at)
-                                                <form action="{{ route('admin.category.restore', $category) }}" method="post">
+                                            @if($post->deleted_at)
+                                                <form action="{{ route('admin.post.restore', $post) }}" method="post">
                                                     @csrf
                                                     @method('PATCH')
                                                     <button
@@ -77,7 +77,7 @@
                                                     </button>
                                                 </form>
                                             @else
-                                                <form action="{{ route('admin.category.delete', $category) }}" method="post">
+                                                <form action="{{ route('admin.post.delete', $post) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button
@@ -86,27 +86,27 @@
                                                     >
                                                     </button>
                                                 </form>
-                                                <a href="{{ route('admin.category.edit', $category) }}">
+                                                <a href="{{ route('admin.post.edit', $post) }}">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <br>
-                                                <a href="{{ route('admin.category.show', $category) }}">
+                                                <a href="{{ route('admin.post.show', $post) }}">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
                                             @endif
                                         </td>
-                                        <td>{{ $category->created_at }}</td>
-                                        @if(!$category->deleted_at)
-                                            <td>Категория ещё не удалена</td>
+                                        <td>{{ $post->created_at }}</td>
+                                        @if(!$post->deleted_at)
+                                            <td>Пост ещё не удален</td>
                                         @else
-                                            <td>{{ $category->deleted_at }}</td>
+                                            <td>{{ $post->deleted_at }}</td>
                                         @endif
                                     </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
                                 <div class="pl-2">
-                                    {{ $categories->links('vendor.pagination.bootstrap-4') }}
+                                    {{ $posts->links('vendor.pagination.bootstrap-4') }}
                                 </div>
                             </div>
                             <!-- /.card-body -->

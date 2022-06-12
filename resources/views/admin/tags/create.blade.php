@@ -1,5 +1,7 @@
 @extends('admin.layouts.main')
 
+@section('title', 'Создание тега')
+
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -11,8 +13,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admins.main') }}">Админка</a></li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -29,7 +30,7 @@
                     <form action="{{ route('admin.tag.store') }}" method="post" class="w-25">
                         @csrf
                         <div class="form-group">
-                            <input type="text" class="form-control" name="title" placeholder="Название Категории">
+                            <input type="text" class="form-control" name="title" placeholder="Название Категории" value="{{ old('title') }}">
                             @error('title')
                             <strong class="text-danger">
                                 {{ $message }}

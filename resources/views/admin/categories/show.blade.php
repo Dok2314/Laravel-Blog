@@ -1,5 +1,7 @@
 @extends('admin.layouts.main')
 
+@section('title', 'Предпросмотр категории')
+
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->

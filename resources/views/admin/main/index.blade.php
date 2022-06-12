@@ -1,5 +1,10 @@
 @extends('admin.layouts.main')
 
+@section('title')
+    Админка |
+{{ auth()->user()->name ?? 'Guest' }}
+@endsection
+
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
