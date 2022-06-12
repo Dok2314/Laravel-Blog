@@ -11,15 +11,21 @@ class StoreController extends Controller
 {
     public function __invoke(StoreRequest $request)
     {
-        $data = [
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-            'category_id' => $request->input('category'),
-            'preview_image' => $request->file('preview_image')->store('posts', 'images'),
-            'main_image' => $request->file('main_image')->store('posts', 'images')
-        ];
+        try{
+            $data = [
+                'title' => $request->input('title'),
+                'content' => $request->input('content'),
+                'category_id' => $request->input('category'),
+                'preview_image' => $request->file('preview_image')->store('posts', 'images'),
+                'main_image' => $request->file('main_image')->store('posts', 'images')
+            ];
 
-        Post::firstOrCreate($data);
+            $post = Post::firstOrCreate($data);
+
+            $post->tags()->sync($request->input('tags'));
+        }catch (\Exception $exception){
+            abort(404);
+        }
 
         return redirect()
             ->route('admin.post.index')
