@@ -1,5 +1,7 @@
 @extends('admin.layouts.main')
 
+@section('title', 'Список тегов')
+
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -11,8 +13,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admins.main') }}">Админка</a></li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -96,7 +97,7 @@
                                             </td>
                                             <td>{{ $tag->created_at }}</td>
                                             @if(!$tag->deleted_at)
-                                                <td>Категория ещё не была удалена</td>
+                                                <td>Тег ещё не удален</td>
                                             @else
                                                 <td>{{ $tag->deleted_at }}</td>
                                             @endif
