@@ -7,8 +7,8 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Редактирование Категории <strong>{{ $category->title }}</strong></h1>
-                        <a href="{{ route('admin.category.index') }}"><button class="btn btn-warning mt-3">Назад</button></a>
+                        <h1 class="m-0">Редактирование Категории <strong>{{ $tag->title }}</strong></h1>
+                        <a href="{{ route('admin.tag.index') }}"><button class="btn btn-warning mt-3">Назад</button></a>
                         <hr>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
@@ -28,11 +28,11 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ route('admin.category.edit', $category) }}" method="post" class="w-25">
+                        <form action="{{ route('admin.tag.edit', $tag) }}" method="post" class="w-25">
                             @csrf
                             @method('PATCH')
                             <div class="form-group">
-                                <input type="text" class="form-control" value="{{ $category->title }}" name="title" placeholder="Название Категории">
+                                <input type="text" class="form-control" value="{{ $tag->title }}" name="title" placeholder="Название Категории">
                                 @error('title')
                                 <strong class="text-danger">
                                     {{ $message }}
