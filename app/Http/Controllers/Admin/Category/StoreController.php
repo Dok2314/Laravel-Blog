@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers\Admin\Category;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Category\StoreRequest;
-use App\Models\Category;
 
-class StoreController extends Controller
+class StoreController extends BaseController
 {
     public function __invoke(StoreRequest $request)
     {
-        $data = $request->validated();
-
-        Category::firstOrCreate($data);
+        $this->service->store($request);
 
         return redirect()
             ->route('admin.category.index')

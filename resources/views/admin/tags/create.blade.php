@@ -30,7 +30,7 @@
                     <form action="{{ route('admin.tag.store') }}" method="post" class="w-25">
                         @csrf
                         <div class="form-group">
-                            <input type="text" class="form-control" name="title" placeholder="Название Категории" value="{{ old('title') }}">
+                            <input type="text" class="form-control" name="title" placeholder="Название тега" value="{{ old('title') }}">
                             @error('title')
                             <strong class="text-danger">
                                 {{ $message }}
