@@ -25,6 +25,14 @@
                     </p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.user.index') }}" class="nav-link {{ request()->routeIs('admin.user.index') ? 'active' : ''}}">
+                    <i class="fas fa-users"></i>
+                    <p>
+                        Пользователи
+                    </p>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>
