@@ -1,6 +1,6 @@
 @extends('admin.layouts.main')
 
-@section('title', 'Список категорий')
+@section('title', 'Список пользователей')
 
 @section('content')
 <div class="content-wrapper">
