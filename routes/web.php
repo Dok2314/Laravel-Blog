@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Main as AdminMain;
 use App\Http\Controllers\Admin\Category as AdminCategory;
 use App\Http\Controllers\Admin\Post as AdminPost;
 use App\Http\Controllers\Admin\Tag as AdminTag;
+use App\Http\Controllers\Admin\User as AdminUser;
 use App\Http\Controllers\Main as Main;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,28 @@ Route::group(['prefix' => 'admin'], function (){
     Route::group(['as' => 'admins.'], function () {
         Route::get('/', AdminMain\IndexController::class)
             ->name('main');
+    });
+
+    Route::group(['prefix' => 'users', 'as' => 'admin.user.'], function () {
+        Route::get('/', AdminUser\IndexController::class)
+            ->name('index');
+        Route::get('/create', AdminUser\CreateController::class)
+            ->name('create');
+        Route::post('/', AdminUser\StoreController::class)
+            ->name('store');
+
+        Route::group(['prefix' => '{user}'], function (){
+            Route::get('/edit', AdminUser\EditController::class)
+                ->name('edit');
+            Route::patch('/edit', AdminUser\UpdateController::class)
+                ->name('edit');
+            Route::get('/show', AdminUser\ShowController::class)
+                ->name('show');
+            Route::delete('/delete', AdminUser\DeleteController::class)
+                ->name('delete');
+            Route::patch('/restore', AdminUser\RestoreController::class)
+                ->name('restore');
+        });
     });
 
     Route::group(['prefix' => 'posts', 'as' => 'admin.post.'], function () {
