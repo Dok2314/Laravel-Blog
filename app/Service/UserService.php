@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Mail\User\PasswordMail;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -24,9 +25,11 @@ class UserService
                 'role' => $request->input('role_id')
             ];
 
-            User::firstOrCreate($data);
+            $user = User::firstOrCreate($data);
 
             Mail::to($data['email'])->send(new PasswordMail($password));
+
+            event(new Registered($user));
 
             DB::commit();
         }catch (\Exception $exception){

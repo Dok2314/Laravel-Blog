@@ -55,9 +55,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#"><span class="flag-icon flag-icon-squared rounded-circle flag-icon-gb"></span> Eng</a>
                     </li>
+                    @auth
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Download</a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <input type="submit" value="Выйти" class="btn bnt-primary">
+                        </form>
                     </li>
+                    @endauth
                 </ul>
             </div>
         </nav>
