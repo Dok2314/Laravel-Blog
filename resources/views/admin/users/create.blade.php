@@ -47,22 +47,6 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" value="{{ old('password') }}" name="password" placeholder="Пароль">
-                            @error('password')
-                            <strong class="text-danger">
-                                {{ $message }}
-                            </strong><br>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" value="{{ old('password-confirm') }}" name="password-confirm" placeholder="Повторите пароль">
-                            @error('password-confirm')
-                            <strong class="text-danger">
-                                {{ $message }}
-                            </strong><br>
-                            @enderror
-                        </div>
-                        <div class="form-group">
                             <label>Выберите Роль</label>
                             <select name="role_id" class="form-control">
                                 @foreach($roles as $id => $role)
