@@ -25,7 +25,7 @@ Route::group([], function () {
         ->name('home');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function (){
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function (){
     Route::group(['as' => 'admins.'], function () {
         Route::get('/', AdminMain\IndexController::class)
             ->name('main');
@@ -120,5 +120,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     });
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
