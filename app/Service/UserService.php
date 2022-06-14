@@ -15,7 +15,8 @@ class UserService
             $data = [
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
-                'password' => Hash::make($request->input('password'))
+                'password' => Hash::make($request->input('password')),
+                'role' => $request->input('role_id')
             ];
 
             User::firstOrCreate($data);
@@ -33,6 +34,7 @@ class UserService
             DB::beginTransaction();
             $user->name = $request->input('name');
             $user->email = $request->input('email');
+            $user->role = $request->input('role_id');
 
             if ($request->filled('password')) {
                 $user->password = Hash::make($request->input('password'));
