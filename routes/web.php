@@ -21,10 +21,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([], function () {
-    Route::get('/', Main\IndexController::class);
+    Route::get('/', Main\IndexController::class)
+        ->name('home');
 });
 
-Route::group(['prefix' => 'admin'], function (){
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function (){
     Route::group(['as' => 'admins.'], function () {
         Route::get('/', AdminMain\IndexController::class)
             ->name('main');
