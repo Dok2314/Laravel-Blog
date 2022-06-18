@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin\Post;
 
-use App\Models\Post;
+use App\Models\Comment;
 
 class DeleteController extends BaseController
 {
-    public function __invoke(Post $post)
+    public function __invoke(Comment $comment)
     {
-        $post->delete();
+        $comment->delete();
 
         return redirect()->route('admin.post.index')
             ->with('success', 'Пост успешно удален!');

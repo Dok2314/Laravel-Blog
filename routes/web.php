@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\Main as AdminMain;
+use App\Http\Controllers\Personal\Main as PersonalMain;
+use App\Http\Controllers\Personal\Comment as PersonalComment;
+use App\Http\Controllers\Personal\Liked as PersonalLiked;
 use App\Http\Controllers\Admin\Category as AdminCategory;
 use App\Http\Controllers\Admin\Post as AdminPost;
 use App\Http\Controllers\Admin\Tag as AdminTag;
@@ -23,6 +26,36 @@ use Illuminate\Support\Facades\Route;
 Route::group([], function () {
     Route::get('/', Main\IndexController::class)
         ->name('home');
+});
+
+Route::group(['prefix' => 'personal', 'middleware' => ['auth','verified']], function () {
+    Route::group(['as' => 'personal.'], function () {
+        Route::get('/', PersonalMain\IndexController::class)
+            ->name('main');
+    });
+
+    Route::group(['as' => 'personal.'], function () {
+        Route::get('/liked', PersonalLiked\IndexController::class)
+            ->name('liked');
+        Route::delete('{post}', PersonalLiked\DeleteController::class)
+            ->name('delete');
+    });
+
+    Route::group(['prefix' => 'comments', 'as' => 'personal.comment.'], function () {
+        Route::get('/', PersonalComment\IndexController::class)
+            ->name('index');
+
+        Route::group(['prefix' => '{comment}'], function (){
+            Route::get('/edit', PersonalComment\EditController::class)
+                ->name('edit');
+            Route::patch('/edit', PersonalComment\UpdateController::class)
+                ->name('edit');
+            Route::delete('/delete', PersonalComment\DeleteController::class)
+                ->name('delete');
+            Route::patch('/restore', PersonalComment\RestoreController::class)
+                ->name('restore');
+        });
+    });
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function (){
