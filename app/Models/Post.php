@@ -14,6 +14,8 @@ class Post extends Model
 
     protected $guarded = false;
 
+    protected $withCount = ['likedUsers'];
+
     public function category()
     {
         return $this->belongsTo(Category::class);

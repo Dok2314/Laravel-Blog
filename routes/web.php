@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Post as PostController;
 use App\Http\Controllers\Post\Comment as PostCommentController;
+use App\Http\Controllers\Post\Like as PostLikeController;
+use App\Http\Controllers\Category as CategoryController;
+use App\Http\Controllers\Category\Post as CategoryPostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +32,15 @@ Route::group([], function () {
         ->name('home');
 });
 
+Route::group(['prefix' => 'categories'], function () {
+    Route::get('/', CategoryController\IndexController::class)
+        ->name('categories');
+
+    Route::group(['prefix' => '{category}/posts'], function (){
+        Route::get('/', CategoryPostController\IndexController::class)->name('category.find.post');
+    });
+});
+
 Route::group(['prefix' => 'posts'], function () {
     Route::get('/', PostController\IndexController::class)
         ->name('post.index');
@@ -40,6 +52,11 @@ Route::group(['prefix' => 'posts'], function () {
         Route::group(['prefix' => '/comments'], function (){
             Route::post('/',PostCommentController\StoreController::class)
                 ->name('store');
+        });
+
+        Route::group(['prefix' => '/likes'], function (){
+            Route::post('/',PostLikeController\StoreController::class)
+                ->name('like');
         });
     });
 });

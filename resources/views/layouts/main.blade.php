@@ -30,6 +30,9 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ route('home') }}">Блог</a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('categories') }}">Категории</a>
+                    </li>
                     @guest()
                         <li class="nav-item active">
                             <a class="nav-link" href="{{ route('login') }}">Войти</a>

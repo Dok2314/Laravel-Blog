@@ -11,7 +11,28 @@
                     <div class="blog-post-thumbnail-wrapper">
                         <img src="{{ Storage::disk('images')->url($post->main_image) }}">
                     </div>
-                    <p class="blog-post-category">{{ $post->category->title }}</p>
+                    <div class="d-flex justify-content-between">
+                        <p class="blog-post-category">{{ $post->category->title }}</p>
+                        @auth()
+                        <form action="{{ route('like', $post) }}" method="post">
+                            @csrf
+                            <span>{{ $post->liked_users_count }}</span>
+                            <button type="submit" class="border-0 bg-transparent">
+                                    @if(auth()->user()->likedPosts->contains($post->id))
+                                        <i class="fas fa-heart" style="color: red;"></i>
+                                    @else
+                                        <i class="fas fa-heart"></i>
+                                    @endif
+                            </button>
+                        </form>
+                        @endauth
+                        @guest()
+                            <div>
+                                <span>{{ $post->liked_users_count }}</span>
+                                <i class="fas fa-heart"></i>
+                            </div>
+                        @endguest
+                    </div>
                     <a href="{{ route('show', $post) }}" class="blog-post-permalink">
                         <h6 class="blog-post-title">{!! $post->content !!}</h6>
                     </a>
@@ -33,6 +54,29 @@
                             <div class="blog-post-thumbnail-wrapper">
                                 <img src="{{ Storage::disk('images')->url($random->main_image) }}">
                             </div>
+                            <div class="d-flex justify-content-between">
+                                <p class="blog-post-category">{{ $random->category->title }}</p>
+                                @auth()
+                                <form action="{{ route('like', $random) }}" method="post">
+                                    @csrf
+                                    <span>{{ $random->liked_users_count }}</span>
+                                    <button type="submit" class="border-0 bg-transparent">
+
+                                            @if(auth()->user()->likedPosts->contains($random->id))
+                                                <i class="fas fa-heart" style="color: red;"></i>
+                                            @else
+                                                <i class="fas fa-heart"></i>
+                                            @endif
+                                    </button>
+                                </form>
+                                @endauth
+                                @guest()
+                                    <div>
+                                        <span>{{ $random->liked_users_count }}</span>
+                                        <i class="fas fa-heart"></i>
+                                    </div>
+                                @endguest
+                            </div>
                             <p class="blog-post-category">{{ $random->category->title }}</p>
                             <a href="{{ route('show', $random) }}" class="blog-post-permalink">
                                 <h6 class="blog-post-title">{!! $random->content !!}</h6>
@@ -50,6 +94,23 @@
                         <li class="post">
                             <a href="{{ route('show', $post) }}" class="post-permalink media">
                                 <img src="{{ Storage::disk('images')->url($post->main_image) }}">
+
+                                <div class="d-flex justify-content-between">
+                                    <p class="blog-post-category">{{ $post->title }}</p>
+                                    <form action="{{ route('like', $post) }}" method="post">
+                                        @csrf
+                                        <button type="submit" class="border-0 bg-transparent">
+                                            @auth()
+                                                @if(auth()->user()->likedPosts->contains($post->id))
+                                                    <i class="fas fa-heart" style="color: red;"></i>
+                                                @else
+                                                    <i class="fas fa-heart"></i>
+                                                @endif
+                                            @endauth
+                                        </button>
+                                    </form>
+                                </div>
+
                                 <div class="media-body">
                                     <h6 class="post-title">{{ $post->title }}</h6>
                                 </div>
