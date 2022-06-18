@@ -12,7 +12,7 @@
                         <img src="{{ Storage::disk('images')->url($post->main_image) }}">
                     </div>
                     <p class="blog-post-category">{{ $post->category->title }}</p>
-                    <a href="{{ route('show', $post) }}" class="blog-post-permalink">
+                    <a href="#" class="blog-post-permalink">
                         <h6 class="blog-post-title">{!! $post->content !!}</h6>
                     </a>
                 </div>
@@ -34,8 +34,8 @@
                                 <img src="{{ Storage::disk('images')->url($random->main_image) }}">
                             </div>
                             <p class="blog-post-category">{{ $random->category->title }}</p>
-                            <a href="{{ route('show', $random) }}" class="blog-post-permalink">
-                                <h6 class="blog-post-title">{!! $random->content !!}</h6>
+                            <a href="#!" class="blog-post-permalink">
+                                <h6 class="blog-post-title">{{ $random->content }}</h6>
                             </a>
                         </div>
                         @endforeach
@@ -48,7 +48,7 @@
                     <ul class="post-list">
                         @foreach($likedPosts as $post)
                         <li class="post">
-                            <a href="{{ route('show', $post) }}" class="post-permalink media">
+                            <a href="#!" class="post-permalink media">
                                 <img src="{{ Storage::disk('images')->url($post->main_image) }}">
                                 <div class="media-body">
                                     <h6 class="post-title">{{ $post->title }}</h6>

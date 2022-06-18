@@ -11,7 +11,8 @@ use App\Http\Controllers\Admin\User as AdminUser;
 use App\Http\Controllers\Main as Main;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Post as PostController;
+use App\Http\Controllers\Post\Comment as PostCommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +27,21 @@ use Illuminate\Support\Facades\Route;
 Route::group([], function () {
     Route::get('/', Main\IndexController::class)
         ->name('home');
+});
+
+Route::group(['prefix' => 'posts'], function () {
+    Route::get('/', PostController\IndexController::class)
+        ->name('post.index');
+
+    Route::group(['prefix' => '{post}'], function (){
+        Route::get('/show', PostController\ShowController::class)
+            ->name('show');
+
+        Route::group(['prefix' => '/comments'], function (){
+            Route::post('/',PostCommentController\StoreController::class)
+                ->name('store');
+        });
+    });
 });
 
 Route::group(['prefix' => 'personal', 'middleware' => ['auth','verified']], function () {
